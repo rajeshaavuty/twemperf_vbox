@@ -87,12 +87,14 @@ call_recv_start(struct context *ctx, event_type_t type, void *rarg, void *carg)
     req_rsp_time = timer_now() - call->req.send_start;
 
     stats->req_rsp_sum += req_rsp_time;
+    //log_stderr("%3.6f\n", req_rsp_time);
     stats->req_rsp_sum2 += SQUARE(req_rsp_time);
     stats->req_rsp_min = MIN(req_rsp_time, stats->req_rsp_min);
     stats->req_rsp_max = MAX(req_rsp_time, stats->req_rsp_max);
 
     bin = MIN(lrint(req_rsp_time / HIST_BIN_WIDTH), HIST_NUM_BINS);
     stats->req_rsp_hist[bin]++;
+    stats->resp_times[req_index++] = req_rsp_time / HIST_BIN_WIDTH;	/* Rajesh */
 }
 
 static void

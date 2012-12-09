@@ -206,6 +206,7 @@ stats_init(struct context *ctx)
     stats->req_rsp_max = 0.0;
     for (i = 0; i < HIST_NUM_BINS; i++) {
         stats->req_rsp_hist[i] = 0;
+	stats->resp_times[i] = 0;	/* Rajesh */
     }
 
     stats->nrsp = 0;
@@ -356,7 +357,7 @@ stats_dump(struct context *ctx)
         rsp_period = delta / stats->nrsp;
         rsp_rate = stats->nrsp / delta;
 
-        log_stderr("Response rate: %.1f rsp/s (%.1f ms/rsp)", rsp_rate,
+        log_stderr("Response rate: %.1f rsp/s (%.3f ms/rsp)", rsp_rate,
                    1e3 * rsp_period);
 
         rsp_size_min = stats->rsp_bytes_rcvd_min;
@@ -365,7 +366,7 @@ stats_dump(struct context *ctx)
         rsp_size_stddev = STDDEV(stats->rsp_bytes_rcvd, stats->rsp_bytes_rcvd2,
                                  stats->nrsp);
 
-        log_stderr("Response size [B]: avg %.1f min %.1f max %.1f stddev %.2f",
+        log_stderr("Response size [B]: avg %.3f min %.3f max %.3f stddev %.2f",
                    rsp_size_avg, rsp_size_min, rsp_size_max, rsp_size_stddev);
 
         req_rsp_avg = stats->req_rsp_sum / stats->nrsp;
@@ -374,7 +375,7 @@ stats_dump(struct context *ctx)
         req_rsp_stddev = STDDEV(stats->req_rsp_sum, stats->req_rsp_sum2,
                                 stats->nrsp);
 
-        log_stderr("Response time [ms]: avg %.1f min %.1f max %.1f stddev %.2f",
+        log_stderr("Response time [ms]: avg %.3f min %.3f max %.3f stddev %.2f",
                    1e3 * req_rsp_avg, 1e3 * req_rsp_min, 1e3 * req_rsp_max,
                    req_rsp_stddev);
 
@@ -424,10 +425,10 @@ stats_dump(struct context *ctx)
             }
         }
 
-        log_stderr("Response time [ms]: p25 %.1f p50 %.1f p75 %.1f",
+        log_stderr("Response time [ms]: p25 %.3f p50 %.3f p75 %.3f",
                    1e3 * req_rsp_p25, 1e3 * req_rsp_p50, 1e3 * req_rsp_p75);
 
-        log_stderr("Response time [ms]: p95 %.1f p99 %.1f p999 %.1f",
+        log_stderr("Response time [ms]: p95 %.3f p99 %.3f p999 %.3f",
                    1e3 * req_rsp_p95, 1e3 * req_rsp_p99, 1e3 * req_rsp_p999);
 
         log_stderr("Response type: stored %"PRIu32" not_stored %"PRIu32" "
@@ -444,6 +445,13 @@ stats_dump(struct context *ctx)
                    "server_error %"PRIu32"", stats->rsp_type[RSP_ERROR],
                    stats->rsp_type[RSP_CLIENT_ERROR],
                    stats->rsp_type[RSP_SERVER_ERROR]);
+
+	/* Rajesh 	*/
+		
+	for (i = 0; i < req_index; i++) {
+		log_stderr("%6.3f", stats->resp_times[i]/1000.0);
+	}
+	
     }
 
     /*

@@ -22,8 +22,10 @@
 #include <sys/resource.h>
 
 #define HIST_MAX_TIME  100                     /* max time in sec (histogram resolution) */
-#define HIST_BIN_WIDTH 1e-3                    /* bin width in sec (granularity) */
-#define HIST_NUM_BINS  (HIST_MAX_TIME * 1000)  /* # bins */
+#define HIST_BIN_WIDTH 1e-6                    /* bin width in sec (granularity) */
+#define HIST_NUM_BINS  (HIST_MAX_TIME * 1000000)  /* # bins */
+
+uint32_t req_index;				/* Rajesh */
 
 struct stats {
     struct rusage rusage_start;                /* resource usage at start */
@@ -74,6 +76,7 @@ struct stats {
     double        req_rsp_min;                 /* min request to response time in sec */
     double        req_rsp_max;                 /* max request to response time in sec */
     long int      req_rsp_hist[HIST_NUM_BINS]; /* histogram of request to response time */
+    uint32_t	  resp_times[HIST_NUM_BINS];	/* Added by Rajesh*/
 
     uint32_t      nrsp;                        /* # responses received */
     double        rsp_bytes_rcvd;              /* bytes received */
