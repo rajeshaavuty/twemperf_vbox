@@ -445,13 +445,6 @@ stats_dump(struct context *ctx)
                    "server_error %"PRIu32"", stats->rsp_type[RSP_ERROR],
                    stats->rsp_type[RSP_CLIENT_ERROR],
                    stats->rsp_type[RSP_SERVER_ERROR]);
-
-	/* Rajesh 	*/
-		
-	for (i = 0; i < req_index; i++) {
-		log_stderr("%6.3f", stats->resp_times[i]/1000.0);
-	}
-	
     }
 
     /*
@@ -508,6 +501,12 @@ stats_dump(struct context *ctx)
         log_stderr("Net I/O: bytes %.1f %s rate %.1f KB/s (%.1f*10^6 bps)",
                    total, metric, total_rate / 1024.0,
                    8e-6 * total_size / delta);
+    }
+
+    /* Rajesh 	*/
+		
+    for (i = 0; i < req_index; i++) {
+	log_stderr("%6.3f", stats->resp_times[i]/1000.0);
     }
 
     log_stderr("");

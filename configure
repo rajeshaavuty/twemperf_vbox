@@ -9316,7 +9316,7 @@ if ${ac_cv_lib_dl_dlopen+:} false; then :
   $as_echo_n "(cached) " >&6
 else
   ac_check_lib_save_LIBS=$LIBS
-LIBS="-ldl  $LIBS"
+LIBS="-ldl  $LIBS -lrt"
 cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
@@ -9369,7 +9369,7 @@ if ${ac_cv_lib_dld_shl_load+:} false; then :
   $as_echo_n "(cached) " >&6
 else
   ac_check_lib_save_LIBS=$LIBS
-LIBS="-ldld  $LIBS"
+LIBS="-ldld  $LIBS -lrt"
 cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
@@ -9412,7 +9412,7 @@ if ${ac_cv_lib_dl_dlopen+:} false; then :
   $as_echo_n "(cached) " >&6
 else
   ac_check_lib_save_LIBS=$LIBS
-LIBS="-ldl  $LIBS"
+LIBS="-ldl  $LIBS -lrt"
 cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
@@ -9451,7 +9451,7 @@ if ${ac_cv_lib_svld_dlopen+:} false; then :
   $as_echo_n "(cached) " >&6
 else
   ac_check_lib_save_LIBS=$LIBS
-LIBS="-lsvld  $LIBS"
+LIBS="-lsvld  $LIBS -lrt"
 cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
@@ -9490,7 +9490,7 @@ if ${ac_cv_lib_dld_dld_link+:} false; then :
   $as_echo_n "(cached) " >&6
 else
   ac_check_lib_save_LIBS=$LIBS
-LIBS="-ldld  $LIBS"
+LIBS="-ldld  $LIBS -lrt"
 cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
@@ -19713,7 +19713,7 @@ if ${ac_cv_lib_m_pow+:} false; then :
   $as_echo_n "(cached) " >&6
 else
   ac_check_lib_save_LIBS=$LIBS
-LIBS="-lm  $LIBS"
+LIBS="-lm  $LIBS -lrt"
 cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
@@ -19826,7 +19826,7 @@ if ${ac_cv_lib_m_pow+:} false; then :
   $as_echo_n "(cached) " >&6
 else
   ac_check_lib_save_LIBS=$LIBS
-LIBS="-lm  $LIBS"
+LIBS="-lm  $LIBS -lrt"
 cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
@@ -19861,7 +19861,7 @@ if test "x$ac_cv_lib_m_pow" = xyes; then :
 #define HAVE_LIBM 1
 _ACEOF
 
-  LIBS="-lm $LIBS"
+  LIBS="-lm $LIBS -lrt"
 
 fi
 

@@ -61,6 +61,8 @@
 
 /* timeval to seconds */
 #define TV_TO_SEC(_tv)  ((_tv)->tv_sec + (1e-6 * (_tv)->tv_usec))
+/* Rajesh */
+#define TSPEC_TO_SEC(_tv)  ((_tv)->tv_sec + (1e-9 * (_tv)->tv_nsec))
 
 #define MCP_INET4_ADDRSTRLEN    (sizeof("255.255.255.255") - 1)
 #define MCP_INET6_ADDRSTRLEN    \

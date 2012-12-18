@@ -17,6 +17,7 @@
  */
 
 #include <sys/time.h>
+#include <time.h>
 
 #include <mcp_core.h>
 
@@ -74,6 +75,7 @@ timer_put(struct timer *t)
     nfree_timerq++;
 }
 
+/*
 static void
 timer_now_update(void)
 {
@@ -87,6 +89,24 @@ timer_now_update(void)
 
     now = TV_TO_SEC(&tv);
 }
+*/
+
+static void
+timer_now_update(void)
+{
+    int status;
+    struct timespec current;
+
+    status = clock_gettime(CLOCK_MONOTONIC_RAW, &current);
+
+    if (status < 0) {
+        log_panic("clock get time failed: %s", strerror(errno));
+    }
+
+    now = TSPEC_TO_SEC(&current);
+
+}
+
 
 double
 timer_now(void)
